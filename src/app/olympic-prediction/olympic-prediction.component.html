@@ -1,0 +1,34 @@
+<div *ngIf= "olympicPredictService.isPredictionReleased==false" class="flex flex-col items-center mt-60">
+    <h1 style="font-family: poppins;" class="text-stone-100 text-center mb-4 text-xl">
+        Wybierz dyscyplinę sportową
+    </h1>
+    <select style="font-family: poppins;" name="scrap group" id="scrapGroup"
+        class="border-solid border-2 rounded text-gray-300 border-gray-500 bg-gray-500 py-2 px-4 w-1/2 text-center"
+        [(ngModel)]="choosedSportName">
+        <option *ngFor="let sportName of sportsNames" [value]="sportName">
+            {{ sportName }}
+        </option>
+    </select>
+
+    <ng-container *ngIf="choosedSportName!=null && choosedSportName!=''" class="">
+        <h1 style="font-family: poppins;" class="text-stone-100 text-center mb-4 text-xl mt-10">
+            Wybierz podkategorię sportową
+        </h1>
+        <select style="font-family: poppins;" name="scrap group" id="scrapGroup"
+            class="border-solid border-2 rounded text-gray-300 border-gray-500 bg-gray-500 py-2 px-4 w-1/2 text-center"
+            [(ngModel)]="choosedEventSportName">
+            <option *ngFor="let eventName of eventsMap.get(choosedSportName.split(' ')[0])" [value]="eventName">
+                {{ eventName }}
+            </option>
+        </select>
+    </ng-container>
+    <ng-container *ngIf="choosedEventSportName!=null" class="">
+        <button (click)="getMedalPrediction(choosedEventSportName)" class="border-2 border-emerald-300 bg-emerald-400 hover:bg-emerald-600 hover:border-emerald-500 text-black rounded-lg px-4 py-2 mt-2">Oblicz szanse na medal</button>
+    </ng-container>
+</div>
+<div *ngIf="olympicPredictService.isPredictionReleased==true" 
+    class="flex items-center justify-center mt-20">
+    <button (click)="predictionClear()" class="border-2 border-sky-400 rounded-lg p-2 bg-white mb-20 hover:bg-sky-400">
+        Make another prediction
+    </button>
+</div>

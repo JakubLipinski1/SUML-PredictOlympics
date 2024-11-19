@@ -21,7 +21,7 @@ def load_models(filename="models_and_scaler.pkl"):
 
 
 
-df = pd.read_csv("przefiltrowane.csv")
+df = pd.read_csv("D:\\SUML\\SUML-PredictOlympics\\\suml\\przefiltrowane.csv")
 df.dropna(inplace=True)
 
 # Tworzenie kolumn binarnych dla każdego rodzaju medalu
@@ -84,6 +84,31 @@ def predict_top_3_countries(models, scaler, event_name):
             print(f"{team}: {prob:.2%}")
 
 
-# Pobieranie od użytkownika nazwy wydarzenia
-event_name = input("Podaj nazwę wydarzenia: ")
-predict_top_3_countries(models, scaler, event_name)
+def predict_top_3_countries_API(event_name):
+  # Filtrowanie danych dla wybranego wydarzenia
+  event_data = df[df['Event'] == event_name]
+  if event_data.empty:
+    print("Nie znaleziono wydarzenia o nazwie:", event_name)
+    return
+
+  # Tworzenie cech dla eventu
+  event_features = pd.get_dummies(event_data[['Team', 'Sport', 'Event', 'Year', 'Season']], drop_first=True)
+  event_features = event_features.reindex(columns=features.columns, fill_value=0)
+  event_features_scaled = scaler.transform(event_features)
+
+  # Przewidywanie szans na medale
+  for medal_type, model in models.items():
+    probabilities = model.predict_proba(event_features_scaled)[:, 1]
+    team_probabilities = dict(zip(event_data['Team'], probabilities))
+
+    top_3_teams = sorted(team_probabilities.items(), key=lambda x: x[1], reverse=True)[:3]
+
+    print(f"\nTop 3 kraje z największą szansą na zdobycie medalu {medal_type.lower()} w: {event_name}")
+    for team, prob in top_3_teams:
+      print(f"{team}: {prob:.2%}")
+
+
+# # Pobieranie od użytkownika nazwy wydarzenia
+# event_name = input("Podaj nazwę wydarzenia: ")
+# predict_top_3_countries(models, scaler, event_name)
+

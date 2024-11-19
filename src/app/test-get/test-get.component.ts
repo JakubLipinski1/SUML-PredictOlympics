@@ -12,6 +12,8 @@ export class TestGetComponent implements OnInit {
   constructor(private testService: TestService) { }
 
 
+
+
   ngOnInit(): void {
   }
 
@@ -19,7 +21,8 @@ export class TestGetComponent implements OnInit {
   
   testSendGet(){
     this.testService.getTasks().subscribe(test => {
-      console.log(test)
+      alert(test[0])
+      console.log(test[0].nazwa)
     })
   }
 }
