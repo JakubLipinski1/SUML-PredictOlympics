@@ -17,17 +17,17 @@ export class OlympicPredictService {
 
 
   getSports(): Observable<string[]> {
-    return this.http.get<string[]>('http://127.0.0.1:5000/sports');
+    return this.http.get<string[]>('https://jaklip3322-4bbe782f-f250-4f67-91e9-ac673bf58fdb.socketxp.com/sports');
   }
 
   getSportEvents(): Observable<string[]> {
-    return this.http.get<string[]>('http://127.0.0.1:5000/sport/events');
+    return this.http.get<string[]>('https://jaklip3322-4bbe782f-f250-4f67-91e9-ac673bf58fdb.socketxp.com/sport/events');
   }
   
   getOlympicPredict(event_name:string):Observable<Prediction[]>{
 
     this.isPredictionReleased = true;
-    return this.http.get<Prediction[]>('http://127.0.0.1:5000/predict?event_name='+event_name)
+    return this.http.get<Prediction[]>('https://jaklip3322-4bbe782f-f250-4f67-91e9-ac673bf58fdb.socketxp.com/predict?event_name='+event_name)
     
   }
 
