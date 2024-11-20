@@ -1,4 +1,4 @@
-<div *ngIf= "olympicPredictService.isPredictionReleased==false" class="flex flex-col items-center mt-60">
+<div *ngIf= "olympicPredictService.isPredictionReleased==false" class="flex flex-col items-center">
     <h1 style="font-family: poppins;" class="text-stone-100 text-center mb-4 text-xl">
         Wybierz dyscyplinę sportową
     </h1>
@@ -22,7 +22,7 @@
             </option>
         </select>
     </ng-container>
-    <ng-container *ngIf="choosedEventSportName!=null" class="">
+    <ng-container *ngIf="choosedEventSportName!=null && choosedEventSportName!=''" class="">
         <button (click)="getMedalPrediction(choosedEventSportName)" class="border-2 border-emerald-300 bg-emerald-400 hover:bg-emerald-600 hover:border-emerald-500 text-black rounded-lg px-4 py-2 mt-2">Oblicz szanse na medal</button>
     </ng-container>
 </div>

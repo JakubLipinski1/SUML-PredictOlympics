@@ -83,6 +83,8 @@ export class OlympicPredictionComponent implements OnInit {
     this.choosedEventSportName = '';
     this.predictResult = [];
     this.olympicPredictService.isPredictionReleased = false;
+      this.olympicPredictService.setBooleanValue(this.olympicPredictService.isPredictionReleased);
+      console.log('Boolean value set to:',this.olympicPredictService.isPredictionReleased);
   }
 
 }

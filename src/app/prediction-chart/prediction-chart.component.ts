@@ -12,7 +12,18 @@ Chart.register(...registerables);
 export class PredictionChartComponent implements OnInit {
   constructor(public olympicPredictService: OlympicPredictService) {}
 
+  sportName:string;
+
   ngOnInit(): void {
+
+    this.olympicPredictService.isPredictionReleasedData$.subscribe(value => {
+      console.log('Boolean value changed to:', value);
+      // Wywołaj funkcję, gdy wartość zmieni się na `false`
+      if (!value && this.chartInstance) {
+        this.chartInstance.destroy()
+      }
+    });
+
     // Nasłuchiwanie na zmiany w danych predykcji
     this.olympicPredictService.predictionData$.subscribe(data => {
       if(this.chartInstance)
@@ -51,10 +62,10 @@ export class PredictionChartComponent implements OnInit {
   
     // Wypełnij dane
     data.forEach(medal => {
+      this.sportName = medal.event_name;
       medal.top_teams.forEach((team: any) => {
         const teamIndex = labels.indexOf(team.team);
         const probability = parseFloat(team.probability.replace('%', ''));
-  
         if (medal.medal_type === 'gold') {
           goldData[teamIndex] = probability;
         } else if (medal.medal_type === 'silver') {
@@ -109,7 +120,7 @@ export class PredictionChartComponent implements OnInit {
           },
           title: {
             display: true,
-            text: 'Medal Prediction'
+            text: 'Medal Prediction - '+this.sportName
           }
         },
         scales: {
