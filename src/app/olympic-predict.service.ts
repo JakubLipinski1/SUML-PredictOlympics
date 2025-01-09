@@ -21,17 +21,17 @@ export class OlympicPredictService {
   }
 
   getSports(): Observable<string[]> {
-    return this.http.get<string[]>('https://jaklip3322-4bbe782f-f250-4f67-91e9-ac673bf58fdb.socketxp.com/sports');
+    return this.http.get<string[]>('https://suml-predictolympics.onrender.com/sports');
   }
 
   getSportEvents(): Observable<string[]> {
-    return this.http.get<string[]>('https://jaklip3322-4bbe782f-f250-4f67-91e9-ac673bf58fdb.socketxp.com/sport/events');
+    return this.http.get<string[]>('https://suml-predictolympics.onrender.com/sport/events');
   }
   
   getOlympicPredict(event_name:string):Observable<Prediction[]>{
 
     this.isPredictionReleased = true;
-    return this.http.get<Prediction[]>('https://jaklip3322-4bbe782f-f250-4f67-91e9-ac673bf58fdb.socketxp.com/predict?event_name='+event_name)
+    return this.http.get<Prediction[]>('https://suml-predictolympics.onrender.com/predict?event_name='+event_name)
     
   }
 
