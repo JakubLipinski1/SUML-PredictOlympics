@@ -12,7 +12,7 @@ def save_models(models, scaler, filename="models_and_scaler.pkl"):
         joblib.dump({"models": models, "scaler": scaler}, file)
 
 
-def load_models(filename="models_and_scaler.pkl"):
+def load_models(filename="./suml/models_and_scaler.pkl"):
     if os.path.exists(filename):
         with open(filename, "rb") as file:
             return joblib.load(file)
@@ -21,7 +21,7 @@ def load_models(filename="models_and_scaler.pkl"):
 
 
 
-df = pd.read_csv("D:\\SUML\\SUML-PredictOlympics\\\suml\\przefiltrowane.csv")
+df = pd.read_csv("../suml/przefiltrowane.csv")
 df.dropna(inplace=True)
 
 # Tworzenie kolumn binarnych dla każdego rodzaju medalu

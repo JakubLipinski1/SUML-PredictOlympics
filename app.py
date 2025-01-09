@@ -24,7 +24,7 @@ def get_sports_list(file_path):
 @app.route('/sports', methods=['GET'])
 def get_sports():
   """Endpoint zwracający listę dyscyplin sportowych."""
-  sports_file = '../suml/sports.txt'  # Ścieżka do pliku
+  sports_file = './suml/sports.txt'  # Ścieżka do pliku
   sports = get_sports_list(sports_file)
   if sports:
     return jsonify(sports), 200
@@ -44,7 +44,7 @@ def get_sports_event(file_path):
 @app.route('/sport/events', methods=['GET'])
 def get_sport_events():
   """Endpoint zwracający listę dyscyplin sportowych."""
-  sports_file = '../suml/events.txt'  # Ścieżka do pliku
+  sports_file = './suml/events.txt'  # Ścieżka do pliku
   sports = get_sports_list(sports_file)
   if sports:
     return jsonify(sports), 200
