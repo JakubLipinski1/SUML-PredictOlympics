@@ -13,4 +13,3 @@ joblib==1.4.2
 pandas==2.2.3
 pyodbc==5.1.0
 scikit-learn==1.5.2
-scipy==1.13.1
