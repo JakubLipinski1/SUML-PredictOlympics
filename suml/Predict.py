@@ -20,8 +20,10 @@ def load_models(filename="./suml/models_and_scaler.pkl"):
         return None
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_file = os.path.join(BASE_DIR, 'przefiltrowane.csv')
 
-df = pd.read_csv("../suml/przefiltrowane.csv")
+df = pd.read_csv(csv_file)
 df.dropna(inplace=True)
 
 # Tworzenie kolumn binarnych dla każdego rodzaju medalu
