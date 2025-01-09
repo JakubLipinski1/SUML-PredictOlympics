@@ -3,7 +3,7 @@ from flask_cors import CORS
 import sys
 import os
 
-import Predict
+from suml import Predict
 
 
 app = Flask(__name__)
